@@ -11,7 +11,7 @@ const useSignup = () => {
   const [isPending, setIsPending] = useState<boolean>(false);
 
   onAuthStateChanged(auth, (user) => {
-    // console.log(user);
+    console.log(user);
   });
 
   const signup = async (
