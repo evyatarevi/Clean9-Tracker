@@ -1,10 +1,37 @@
+import { createTheme, ThemeProvider, CssBaseline } from "@mui/material";
+// import { StyledEngineProvider } from "@mui/system"; // ensures that the Material-UI styles are injected first, which is necessary for proper styling.
+import { CacheProvider } from "@emotion/react";
+import rtlPlugin from "stylis-plugin-rtl";
+import { prefixer } from "stylis";
+import createCache from "@emotion/cache";
+import { UserContextProvider } from "./context/UserContext.tsx";
 import "./App.css";
 
 import { RouterProvider } from "react-router-dom";
 import router from "./router.tsx";
 
 function App() {
-  return <RouterProvider router={router} />;
+  const theme = createTheme({
+    direction: "rtl",
+  });
+
+  const cacheRtl = createCache({
+    key: "muirtl",
+    stylisPlugins: [prefixer, rtlPlugin],
+  });
+
+  return (
+    // <StyledEngineProvider>
+    <CacheProvider value={cacheRtl}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <UserContextProvider>
+          <RouterProvider router={router} />
+        </UserContextProvider>
+      </ThemeProvider>
+    </CacheProvider>
+    // </StyledEngineProvider>
+  );
 }
 
 export default App;

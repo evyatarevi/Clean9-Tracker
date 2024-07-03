@@ -1,8 +1,13 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebaseConfig";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useUserContext } from "../context/UserContext";
 
 const useLogin = () => {
+  const navigate = useNavigate();
+  const { setUserId } = useUserContext();
+
   const [error, setError] = useState<string | null>(null);
   const [isPending, setIsPending] = useState<boolean>(false);
 
@@ -13,7 +18,8 @@ const useLogin = () => {
     try {
       //login
       const res = await signInWithEmailAndPassword(auth, email, password);
-      console.log(res.user);
+      setUserId(res.user.uid);
+      navigate("/app");
     } catch (error: any) {
       console.log(error.code);
       let errorMessage = "An error occurred";

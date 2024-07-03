@@ -34,12 +34,12 @@ const Login = () => {
       }}
       onSubmit={handleSubmit}
     >
-      <Typography component="h2" variant="h4" gutterBottom>
-        login
+      <Typography component="h2" variant="h4" align="center" gutterBottom>
+        כניסה
       </Typography>
 
       <TextField
-        label="Email"
+        label="אימייל"
         type="email"
         required
         fullWidth
@@ -55,7 +55,7 @@ const Login = () => {
       />
 
       <TextField
-        label="Password"
+        label="סיסמא"
         type="password"
         onChange={(e) => setPassword(e.target.value)}
         value={password}
@@ -72,7 +72,7 @@ const Login = () => {
 
       {!isPending ? (
         <Button type="submit" variant="contained" color="primary" fullWidth>
-          Login
+          כנס
         </Button>
       ) : (
         <Button
