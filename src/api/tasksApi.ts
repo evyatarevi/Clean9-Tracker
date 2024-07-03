@@ -3,12 +3,11 @@ import {
   doc,
   updateDoc,
   getDoc,
-  collection,
-  addDoc,
-  getDocs,
+  // collection,
+  // addDoc,
+  // getDocs,
 } from "firebase/firestore";
-import { Task } from "../types";
-import { StringFormat } from "firebase/storage";
+import { TaskArray } from "../types";
 
 // add
 // try {
@@ -61,11 +60,46 @@ const getUserData = async (userId: string) => {
     throw new Error("Failed to fetch tasks");
   }
 };
-// update
-// const washingtonRef = doc(db, "cities", "DC");
+const updateTasksDay = async (
+  userId: string,
+  day: string,
+  tasks: TaskArray
+) => {
+  console.log("userId: ", userId);
+  console.log("day: ", day);
+  console.log("tasks: ", tasks);
+  try {
+    const docRef = doc(db, "users", userId);
+    await updateDoc(docRef, {
+      // [`tasks.day${day}`]: tasks,
+      [`tasks.${day}`]: tasks,
+    });
+    return "update successful";
+  } catch (error) {
+    throw new Error("Failed to update tasks");
+  }
+};
+
 // // Set the "capital" field of the city 'DC'
 // await updateDoc(washingtonRef, {
 //   capital: true,
 // });
 
-export { getUserData };
+// tasks -> day1 -> []
+
+//update:
+// Create an initial document to update.
+// const frankDocRef = doc(db, "users", "frank");
+// await setDoc(frankDocRef, {
+//     name: "Frank",
+//     favorites: { food: "Pizza", color: "Blue", subject: "recess" },
+//     age: 12
+// });
+
+// To update age and favorite color:
+// await updateDoc(frankDocRef, {
+//     "age": 13,
+//     "favorites.color": "Red"
+// });
+
+export { getUserData, updateTasksDay };

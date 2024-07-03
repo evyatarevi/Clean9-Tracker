@@ -1,5 +1,4 @@
-import { getDocument } from "../../api/expApi";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Typography,
   CircularProgress,
@@ -7,28 +6,32 @@ import {
   List,
   ListItem,
   ListItemText,
-  ListItemSecondaryAction,
-  Checkbox,
-  IconButton,
 } from "@mui/material";
 import { Task } from "../../types";
 import { useUserContext } from "../../context/UserContext";
-import { TasksDays } from "../../types";
+import { updateTasksDay } from "../../api/tasksApi";
 
 const Home = () => {
   const [error, setError] = useState<string | null>();
   const [isPending, setIsPending] = useState<boolean>();
-  const { tasks, setTasks, currentDay } = useUserContext();
+  const { tasks, setTasks, currentDay, userId } = useUserContext();
 
-  const handleToggleCompletion = (index: number) => {
-    if (tasks && currentDay) {
-      const updatedTasks = tasks[currentDay] ? [...tasks[currentDay]] : [];
-      updatedTasks[index].isCompleted = !updatedTasks[index].isCompleted;
-      // Update task completion in the database here
-      setTasks({ ...tasks, [currentDay]: updatedTasks });
+  const handleToggleCompletion = async (index: number) => {
+    try {
+      setIsPending(true);
+      setError("");
+      if (tasks && currentDay && userId) {
+        const updatedTasks = tasks[currentDay] ? [...tasks[currentDay]] : [];
+        updatedTasks[index].isCompleted = !updatedTasks[index].isCompleted;
+        await updateTasksDay(userId, currentDay, updatedTasks);
+        setTasks({ ...tasks, [currentDay]: updatedTasks });
+      }
+    } catch (error: any) {
+      setError(error);
+    } finally {
+      setIsPending(false);
     }
   };
-
   return (
     <Box display="flex" justifyContent="center">
       <Box display="flex" flexDirection="column" alignItems="center">
@@ -49,9 +52,9 @@ const Home = () => {
                 />
               </ListItem>
             ))}
+          {isPending && <CircularProgress size={20} />}
+          {error && <Typography color="error">{error}</Typography>}
         </List>
-        {isPending && <CircularProgress size={20} />}
-        {error && <Typography color="error">{error}</Typography>}
       </Box>
     </Box>
   );
