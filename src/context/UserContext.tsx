@@ -1,27 +1,16 @@
 //properties: userId, tasks, day
 import { createContext, useContext, useEffect, useState } from "react";
-import { type PropsWithChildren, Dispatch, SetStateAction } from "react";
-import { type TasksDays } from "../types";
+import { type PropsWithChildren } from "react";
+import { type TasksDays, type UserContextType } from "../types";
 import { getUserData } from "../api/tasksApi";
+import { calculateWhatDayIsIt } from "../utility/calculateWhatDayIsIt";
 
-// type TasksDaysKeys = keyof TasksDays;
-
-interface UserContextType {
-  userId: string | undefined;
-  setUserId: Dispatch<SetStateAction<string | undefined>>;
-  tasks: TasksDays | undefined;
-  setTasks: Dispatch<SetStateAction<TasksDays | undefined>>;
-  currentDay: string | undefined;
-  setCurrentDay: Dispatch<SetStateAction<string | undefined>>;
-}
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 const UserContextProvider = ({ children }: PropsWithChildren) => {
   const [userId, setUserId] = useState<string>();
   const [tasks, setTasks] = useState<TasksDays>();
-  const [currentDay, setCurrentDay] = useState<string | undefined>("day1");
-
-  console.log("tasks: ", tasks);
+  const [currentDay, setCurrentDay] = useState<string | undefined>();
 
   useEffect(() => {
     if (userId) {
@@ -29,6 +18,9 @@ const UserContextProvider = ({ children }: PropsWithChildren) => {
         const res = await getUserData(userId);
         if (res) {
           setTasks(res.tasks);
+          if (res.startDate) {
+            setCurrentDay(calculateWhatDayIsIt(res.startDate));
+          }
         }
       };
       fetchUserData();

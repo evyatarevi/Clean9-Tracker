@@ -3,6 +3,7 @@ import {
   doc,
   updateDoc,
   getDoc,
+  Timestamp,
   // collection,
   // addDoc,
   // getDocs,
@@ -60,18 +61,15 @@ const getUserData = async (userId: string) => {
     throw new Error("Failed to fetch tasks");
   }
 };
+
 const updateTasksDay = async (
   userId: string,
   day: string,
   tasks: TaskArray
 ) => {
-  console.log("userId: ", userId);
-  console.log("day: ", day);
-  console.log("tasks: ", tasks);
   try {
     const docRef = doc(db, "users", userId);
     await updateDoc(docRef, {
-      // [`tasks.day${day}`]: tasks,
       [`tasks.${day}`]: tasks,
     });
     return "update successful";
@@ -79,6 +77,26 @@ const updateTasksDay = async (
     throw new Error("Failed to update tasks");
   }
 };
+
+const createStartDate = async (userId: string) => {
+  try {
+    const docRef = doc(db, "users", userId);
+    const newDate = Timestamp.fromDate(new Date());
+    await updateDoc(docRef, {
+      startDate: newDate,
+    });
+    return newDate;
+  } catch (error) {
+    throw new Error("Failed to create start date");
+  }
+};
+
+// set new document:
+// await setDoc(doc(db, "cities", "LA"), {
+//   name: "Los Angeles",
+//   state: "CA",
+//   country: "USA",
+// });
 
 // // Set the "capital" field of the city 'DC'
 // await updateDoc(washingtonRef, {
@@ -102,4 +120,4 @@ const updateTasksDay = async (
 //     "favorites.color": "Red"
 // });
 
-export { getUserData, updateTasksDay };
+export { getUserData, updateTasksDay, createStartDate };
