@@ -13,6 +13,7 @@ import { updateTasksDay, createUserDoc } from "../../api/tasksApi";
 import { checkTypeError } from "../../utility/checkTypeError";
 import { calculateWhatDayIsIt } from "../../utility/calculateWhatDayIsIt";
 import images from "../../images/productsImages";
+import Header from "../../components/Header/Header";
 
 const Home = () => {
   const [error, setError] = useState<string | null>();
@@ -58,7 +59,14 @@ const Home = () => {
   }
 
   return (
-    <Box display="flex" justifyContent="center" sx={{ bgcolor: "#eeeeee" }}>
+    <Box
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      sx={{ bgcolor: "#eeeeee" }}
+    >
+      <Header />
+      {/* <div>dssdsdsd</div> */}
       <Box display="flex" flexDirection="column" alignItems="center">
         <List sx={{ width: "20rem" }}>
           {tasks &&
