@@ -1,4 +1,4 @@
-import { doc, setDoc, updateDoc, getDoc } from "firebase/firestore";
+import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
 // Create an initial document to update.
 export const getDocument = async () => {

@@ -4,51 +4,13 @@ import {
   updateDoc,
   getDoc,
   Timestamp,
+  setDoc,
   // collection,
   // addDoc,
   // getDocs,
 } from "firebase/firestore";
 import { TaskArray } from "../types";
-
-// add
-// try {
-//   const docRef = await addDoc(collection(db, "users"), {
-//     first: "Ada",
-//     last: "Lovelace",
-//     born: 1815,
-//   });
-//   console.log("Document written with ID: ", docRef.id);
-// } catch (e) {
-//   console.error("Error adding document: ", e);
-// }
-
-// get
-// let dailyTasks: [] ;
-// const getTasks = async (): Promise<[]> => {
-//   const querySnapshot = await getDocs(collection(db, "tasks"));
-//   querySnapshot.forEach((doc) => {
-//     dailyTasks = doc.data().dailyTasks;
-//   });
-//   return dailyTasks;
-// };
-
-// get
-//
-// const getTasks = async (): Promise<Task[]> => {
-//   try {
-//     const docRef = doc(db, "tasks", "sKfceSJfc6wTARXMqtBW");
-//     const docSnap = await getDoc(docRef);
-
-//     if (docSnap.exists()) {
-//       return docSnap.data().dailyTasks;
-//     } else {
-//       // docSnap.data() will be undefined in this case
-//       return [];
-//     }
-//   } catch (error) {
-//     throw new Error("Failed to fetch tasks");
-//   }
-// };
+import tasks from "../data/usersData";
 
 const getUserData = async (userId: string) => {
   try {
@@ -78,25 +40,33 @@ const updateTasksDay = async (
   }
 };
 
-const createStartDate = async (userId: string) => {
+// const createStartDate = async (userId: string) => {
+//   try {
+//     const docRef = doc(db, "users", userId);
+//     const newDate = Timestamp.fromDate(new Date());
+//     await updateDoc(docRef, {
+//       startDate: newDate,
+//     });
+//     return newDate;
+//   } catch (error) {
+//     throw new Error("Failed to create start date");
+//   }
+// };
+
+const createUserDoc = async (userId: string) => {
   try {
-    const docRef = doc(db, "users", userId);
     const newDate = Timestamp.fromDate(new Date());
-    await updateDoc(docRef, {
+    await setDoc(doc(db, "users", userId), {
       startDate: newDate,
+      tasks,
     });
     return newDate;
   } catch (error) {
-    throw new Error("Failed to create start date");
+    throw new Error("failed");
   }
 };
 
 // set new document:
-// await setDoc(doc(db, "cities", "LA"), {
-//   name: "Los Angeles",
-//   state: "CA",
-//   country: "USA",
-// });
 
 // // Set the "capital" field of the city 'DC'
 // await updateDoc(washingtonRef, {
@@ -120,4 +90,4 @@ const createStartDate = async (userId: string) => {
 //     "favorites.color": "Red"
 // });
 
-export { getUserData, updateTasksDay, createStartDate };
+export { getUserData, updateTasksDay, createUserDoc };

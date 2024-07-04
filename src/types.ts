@@ -5,6 +5,7 @@ export interface Task {
   name: string;
   isCompleted: boolean;
   time: string;
+  image: string;
 }
 
 export type TaskArray = Task[];
