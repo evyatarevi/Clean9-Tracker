@@ -1,15 +1,19 @@
 import { Box, Typography, Button } from "@mui/material";
 import DayProgress from "../DayProgress/DayProgress";
-import bgImages from "../../images/bgImages";
 
-const Header = () => {
+interface headerProps {
+  imageUrl: string;
+}
+
+const Header = ({ imageUrl }: headerProps) => {
   return (
     <Box
       sx={{
         position: "sticky",
         top: 0,
         zIndex: "1",
-        backgroundImage: `url(${bgImages.headerImg})`,
+        // backgroundImage: `url(${bgImages.headerImg})`,
+        backgroundImage: `url(${imageUrl})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         borderBottomRightRadius: "70px",

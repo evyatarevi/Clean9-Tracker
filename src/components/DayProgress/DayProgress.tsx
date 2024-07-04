@@ -20,7 +20,7 @@ const DayProgress = () => {
         value={progressValue}
         size={100}
         // thickness={4}
-        style={{ color: "#33691e" }} // Customize color if needed
+        style={{ color: "#01579b" }} // Customize color if needed
         sx={{
           // border: "solid 5px grey",
           borderRadius: "50%",
@@ -28,7 +28,7 @@ const DayProgress = () => {
         }}
       />
       <Box position="absolute">
-        <Typography variant="h3" component="div" color="#33691e">
+        <Typography variant="h3" component="div" color="#01579b">
           {dayNumber}
         </Typography>
       </Box>

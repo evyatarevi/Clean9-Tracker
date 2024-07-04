@@ -25,7 +25,7 @@ const UserContextProvider = ({ children }: PropsWithChildren) => {
       };
       fetchUserData();
     }
-  }, [userId]);
+  }, [userId, currentDay]);
 
   return (
     <UserContext.Provider

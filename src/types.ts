@@ -22,3 +22,11 @@ export interface UserContextType {
   currentDay: string | undefined;
   setCurrentDay: Dispatch<SetStateAction<string | undefined>>;
 }
+
+export interface NavLinkWithIconProps {
+  to: string;
+  icon: React.ReactElement;
+  label: string;
+}
+
+export type ClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => void;
