@@ -7,6 +7,7 @@ interface headerProps {
 }
 
 const Header = ({ imageUrl, text }: headerProps) => {
+  console.log("header image:", imageUrl);
   return (
     <Box
       sx={{

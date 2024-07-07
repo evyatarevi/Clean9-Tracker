@@ -40,6 +40,7 @@ const Recipes = () => {
       card.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       card.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
+  console.log("filteredCards: ", filteredCards);
 
   useEffect(() => {
     setIsPending(true);
