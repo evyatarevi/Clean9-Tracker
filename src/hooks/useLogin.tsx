@@ -6,7 +6,7 @@ import { useUserContext } from "../context/UserContext";
 
 const useLogin = () => {
   const navigate = useNavigate();
-  const { setUserId } = useUserContext();
+  const { setUserId, setDisplayName } = useUserContext();
 
   const [error, setError] = useState<string | null>(null);
   const [isPending, setIsPending] = useState<boolean>(false);
@@ -19,6 +19,7 @@ const useLogin = () => {
       //login
       const res = await signInWithEmailAndPassword(auth, email, password);
       setUserId(res.user.uid);
+      setDisplayName(res.user.displayName || "");
       navigate("/app");
     } catch (error: any) {
       console.log(error.code);

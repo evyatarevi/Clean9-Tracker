@@ -11,6 +11,7 @@ const UserContextProvider = ({ children }: PropsWithChildren) => {
   const [userId, setUserId] = useState<string>();
   const [tasks, setTasks] = useState<TasksDays>();
   const [currentDay, setCurrentDay] = useState<string | undefined>();
+  const [displayName, setDisplayName] = useState<string | undefined>();
 
   useEffect(() => {
     if (userId) {
@@ -29,7 +30,16 @@ const UserContextProvider = ({ children }: PropsWithChildren) => {
 
   return (
     <UserContext.Provider
-      value={{ userId, setUserId, tasks, setTasks, currentDay, setCurrentDay }}
+      value={{
+        userId,
+        setUserId,
+        tasks,
+        setTasks,
+        currentDay,
+        setCurrentDay,
+        displayName,
+        setDisplayName,
+      }}
     >
       {children}
     </UserContext.Provider>

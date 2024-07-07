@@ -15,10 +15,6 @@ const Recipes = () => {
   const [isPending, setIsPending] = useState<boolean>(true);
   const [error, setError] = useState<string | null>();
 
-  const display = (img: any) => {
-    console.log("img;", img);
-  };
-
   const filteredCards = recipesData.filter(
     (card) =>
       card.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -71,9 +67,6 @@ const Recipes = () => {
         </Box>
         {isPending && <CircularProgress size={100} />}
         {filteredCards.map((recipe, index) => {
-          display(recipe.imgUrl);
-          console.log("recipe.imgUrl: ", recipe.imgUrl);
-
           return <Recipe {...recipe} key={index} />;
         })}
       </Box>

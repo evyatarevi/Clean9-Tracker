@@ -24,7 +24,7 @@ const DayProgress = () => {
         sx={{
           // border: "solid 5px grey",
           borderRadius: "50%",
-          backgroundColor: "rgba(255, 255, 255, 0.5)",
+          backgroundColor: "rgba(255, 255, 255, 0.7)",
         }}
       />
       <Box position="absolute">

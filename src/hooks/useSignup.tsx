@@ -3,16 +3,20 @@ import { auth } from "../config/firebaseConfig";
 import {
   createUserWithEmailAndPassword,
   updateProfile,
-  onAuthStateChanged,
+  // onAuthStateChanged,
 } from "firebase/auth";
+import { useUserContext } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const useSignup = () => {
+  const { setUserId, setDisplayName } = useUserContext();
+  const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
   const [isPending, setIsPending] = useState<boolean>(false);
 
-  onAuthStateChanged(auth, (user) => {
-    console.log(user);
-  });
+  // onAuthStateChanged(auth, (user) => {
+  //   console.log(user);
+  // });
 
   const signup = async (
     email: string,
@@ -23,9 +27,11 @@ const useSignup = () => {
     setIsPending(true);
 
     try {
-      // signup
       const res = await createUserWithEmailAndPassword(auth, email, password);
-      // console.log(res.user);
+      await updateProfile(res.user, { displayName: displayName });
+      setUserId(res.user.uid);
+      setDisplayName(res.user.displayName || "");
+      navigate("/app");
 
       if (!res) {
         // such us the network connection is bad

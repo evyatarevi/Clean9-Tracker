@@ -12,6 +12,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import LockIcon from "@mui/icons-material/Lock";
 import useLogin from "../../hooks/useLogin";
 import bgImages from "../../images/bgImages";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
@@ -110,6 +111,26 @@ const Login = () => {
         )}
 
         {error && <Typography color="error">{error}</Typography>}
+        <Box sx={{ textAlign: "center" }}>
+          עדיין אין לך משתמש?
+          <Link to={"/signup"} style={{ textDecoration: "none" }}>
+            <Typography
+              sx={{
+                display: "inline",
+                ml: "5px",
+                textDecoration: "none",
+                color: "#1976d2",
+                fontWeight: "bold",
+                ":hover": {
+                  textDecoration: "none",
+                  color: "#115293",
+                },
+              }}
+            >
+              הירשם
+            </Typography>
+          </Link>
+        </Box>
       </Box>
     </Box>
   );

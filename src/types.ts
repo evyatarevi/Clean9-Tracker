@@ -21,6 +21,8 @@ export interface UserContextType {
   setTasks: Dispatch<SetStateAction<TasksDays | undefined>>;
   currentDay: string | undefined;
   setCurrentDay: Dispatch<SetStateAction<string | undefined>>;
+  displayName: string | undefined;
+  setDisplayName: Dispatch<SetStateAction<string | undefined>>;
 }
 
 export interface NavLinkWithIconProps {

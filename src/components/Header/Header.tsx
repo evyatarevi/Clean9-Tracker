@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import DayProgress from "../DayProgress/DayProgress";
+import { useUserContext } from "../../context/UserContext";
 
 interface headerProps {
   imageUrl: string;
@@ -7,7 +8,8 @@ interface headerProps {
 }
 
 const Header = ({ imageUrl, text }: headerProps) => {
-  console.log("header image:", imageUrl);
+  const { displayName } = useUserContext();
+
   return (
     <Box
       sx={{
@@ -30,15 +32,20 @@ const Header = ({ imageUrl, text }: headerProps) => {
       >
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Typography
+            // fontFamily="Fredoka"
             variant="body1"
             component="div"
             color="white"
             fontWeight="bold"
+            pl="5px"
             sx={{
-              textShadow: "2px 2px 4px rgba(0, 0, 0, 0.7)",
+              // font-family="Solitreo",
+              fontFamily: "Solitreo",
+              fontSize: "18px",
+              textShadow: "2px 2px 4px rgba(0, 0, 0, 1)",
             }}
           >
-            ברוך הבא מוריה!
+            ברוך הבא {displayName}!
           </Typography>
 
           {/* <Button
@@ -70,6 +77,7 @@ const Header = ({ imageUrl, text }: headerProps) => {
           >
             {text}
           </Typography>
+
           <DayProgress />
         </Box>
       </Box>

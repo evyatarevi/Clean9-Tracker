@@ -25,9 +25,6 @@ const Home = () => {
   const { tasks, setTasks, currentDay, setCurrentDay, userId } =
     useUserContext();
 
-  console.log("currentDay:", currentDay);
-  console.log("tasks:", tasks);
-
   const handleToggleCompletion = async (index: number) => {
     try {
       setIsPending(true);
@@ -86,7 +83,7 @@ const Home = () => {
                     padding: "5px 15px",
                     bgcolor: "background.paper",
                     opacity: task.isCompleted ? "0.3" : "1",
-                    margin: "10px 0",
+                    margin: "24px 0",
                     borderRadius: "15px",
                     boxShadow: "5",
                   }}
@@ -109,7 +106,8 @@ const Home = () => {
                         sx={{
                           textShadow: "2px 2px 4px rgba(0, 0, 0, 0.1)",
                           textAlign: "center",
-                          width: "65px",
+                          width: "75px",
+                          mt: "6px",
                           borderRadius: "5px",
                           padding: "2px",
                           color: "white",

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import useSignup from "../../hooks/useSignup";
 import { type FormEvent } from "react";
@@ -126,6 +127,26 @@ const Signup = () => {
         )}
 
         {error && <Typography color="error">{error}</Typography>}
+        <Box sx={{ textAlign: "center" }}>
+          משתמש רשום?
+          <Link to={"/"} style={{ textDecoration: "none" }}>
+            <Typography
+              sx={{
+                display: "inline",
+                ml: "5px",
+                textDecoration: "none",
+                color: "#1976d2",
+                fontWeight: "bold",
+                ":hover": {
+                  textDecoration: "none",
+                  color: "#115293",
+                },
+              }}
+            >
+              הכנס
+            </Typography>
+          </Link>
+        </Box>
       </Box>
     </Box>
   );
