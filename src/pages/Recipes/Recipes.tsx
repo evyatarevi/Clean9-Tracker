@@ -7,6 +7,7 @@ import bgImages from "../../images/bgImages";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import { getRecipesData } from "../../api/recipesApi";
 import { recipesDataProps } from "../../types";
+import bgLemon from "../../assets/images/background/bgFruits.jpg";
 
 const Recipes = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -47,6 +48,10 @@ const Recipes = () => {
     <Box
       sx={{
         height: isPending ? "100vh" : "",
+
+        backgroundImage: `url(${bgLemon})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
       <Header imageUrl={bgImages.recipesHeaderBg} text="המתכונים שלי" />
@@ -58,7 +63,12 @@ const Recipes = () => {
         m="20px"
         pb="100px"
       >
-        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+        <Box sx={{ backgroundColor: "rgba(255,255,255,1" }}>
+          <SearchBar
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+          />
+        </Box>
         {isPending && <CircularProgress size={100} />}
         {filteredCards.map((recipe, index) => {
           display(recipe.imgUrl);
