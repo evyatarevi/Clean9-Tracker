@@ -57,101 +57,98 @@ const Home = () => {
   };
 
   return (
-    <>
-      <Box
-        display="flex"
-        flexDirection="column"
-        justifyContent="center"
-        sx={{ bgcolor: "#eeeeee" }}
-      >
-        {!currentDay ? (
-          <StartPlaning handleStartPlain={handleStartPlain} />
-        ) : (
-          <>
-            <Header imageUrl={bgImages.headerImg} />
-            <Box display="flex" flexDirection="column" alignItems="center">
-              <List sx={{ width: "20rem" }}>
-                {tasks &&
-                  currentDay &&
-                  tasks[currentDay].map((task: Task, index: number) => (
-                    <ListItem
-                      key={task.id}
+    <Box
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      sx={{ bgcolor: "inherit", pb: "70px" }}
+    >
+      {!currentDay ? (
+        <StartPlaning handleStartPlain={handleStartPlain} />
+      ) : (
+        <>
+          <Header imageUrl={bgImages.headerImg} text="המשימות להיום" />
+          <Box display="flex" flexDirection="column" alignItems="center">
+            <List sx={{ width: "20rem" }}>
+              {tasks &&
+                currentDay &&
+                tasks[currentDay].map((task: Task, index: number) => (
+                  <ListItem
+                    key={task.id}
+                    sx={{
+                      padding: "5px 15px",
+                      bgcolor: "background.paper",
+                      opacity: task.isCompleted ? "0.3" : "1",
+                      margin: "10px 0",
+                      borderRadius: "15px",
+                      boxShadow: "5",
+                    }}
+                    onClick={() => handleToggleCompletion(index)}
+                  >
+                    <ListItemText
+                      primary={
+                        <Typography
+                          variant="body1"
+                          fontSize="1rem"
+                          fontWeight="bold"
+                        >
+                          {task.name}
+                        </Typography>
+                      }
+                      secondary={
+                        <Typography
+                          variant="body1"
+                          fontSize="0.7rem"
+                          sx={{
+                            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.1)",
+                            textAlign: "center",
+                            width: "65px",
+                            borderRadius: "5px",
+                            padding: "2px",
+                            color: "white",
+                            fontWeight: "bold",
+                            backgroundColor:
+                              task.time === "בוקר"
+                                ? "#d8b8d8"
+                                : task.time === "צהריים"
+                                ? "#afc2ae"
+                                : task.time === "ערב"
+                                ? "#f3d1a3 "
+                                : task.time === "לפני השינה"
+                                ? "#aad4f4"
+                                : "#e1888b",
+                          }}
+                        >
+                          {task.time}
+                        </Typography>
+                      }
+                      style={
+                        task.isCompleted
+                          ? {
+                              textDecoration: "line-through",
+                            }
+                          : {}
+                      }
+                    />
+                    <Box
+                      component="img"
                       sx={{
-                        padding: "5px 15px",
-                        // bgcolor: task.isCompleted ? "#bdbdbd" : "background.paper",
-                        bgcolor: "background.paper",
-                        opacity: task.isCompleted ? "0.3" : "1",
-                        margin: "10px 0",
-                        borderRadius: "15px",
-                        boxShadow: "5",
+                        height: 40,
+                        width: 40,
                       }}
-                      onClick={() => handleToggleCompletion(index)}
-                    >
-                      <ListItemText
-                        primary={
-                          <Typography
-                            variant="body1"
-                            fontSize="1rem"
-                            fontWeight="bold"
-                          >
-                            {task.name}
-                          </Typography>
-                        }
-                        secondary={
-                          <Typography
-                            variant="body1"
-                            fontSize="0.7rem"
-                            sx={{
-                              textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
-                              textAlign: "center",
-                              width: "65px",
-                              borderRadius: "5px",
-                              padding: "2px",
-                              color: "white",
-                              fontWeight: "bold",
-                              backgroundColor:
-                                task.time === "בוקר"
-                                  ? "#d8b8d8"
-                                  : task.time === "צהריים"
-                                  ? "#afc2ae"
-                                  : task.time === "ערב"
-                                  ? "#f3d1a3 "
-                                  : task.time === "לפני השינה"
-                                  ? "#aad4f4"
-                                  : "#e1888b",
-                            }}
-                          >
-                            {task.time}
-                          </Typography>
-                        }
-                        style={
-                          task.isCompleted
-                            ? {
-                                textDecoration: "line-through",
-                              }
-                            : {}
-                        }
-                      />
-                      <Box
-                        component="img"
-                        sx={{
-                          height: 40,
-                          width: 40,
-                        }}
-                        alt="fieldsOfGreen"
-                        src={images[task.image]}
-                      />
-                    </ListItem>
-                  ))}
-                {isPending && <CircularProgress size={20} />}
-                {error && <Typography color="error">{error}</Typography>}
-              </List>
-            </Box>
-          </>
-        )}
-        {/* <Footer /> */}
-      </Box>
-    </>
+                      alt="fieldsOfGreen"
+                      src={images[task.image]}
+                    />
+                  </ListItem>
+                ))}
+              {isPending && <CircularProgress size={20} />}
+              {error && <Typography color="error">{error}</Typography>}
+            </List>
+          </Box>
+        </>
+      )}
+      {/* <Footer /> */}
+    </Box>
   );
 };
 

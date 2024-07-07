@@ -8,7 +8,7 @@ import { type NavLinkWithIconProps } from "../../types";
 
 const navItems: NavLinkWithIconProps[] = [
   {
-    to: "",
+    to: "/app",
     icon: <DailyIcon sx={{ fontSize: 30, color: "#212121" }} />,
     label: "יומי",
   },
@@ -18,7 +18,7 @@ const navItems: NavLinkWithIconProps[] = [
     label: "המשימות",
   },
   {
-    to: "",
+    to: "/app/recipes",
     icon: <FastfoodIcon sx={{ fontSize: 30, color: "#212121" }} />,
     label: "ארוחות",
   },

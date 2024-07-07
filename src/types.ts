@@ -30,3 +30,25 @@ export interface NavLinkWithIconProps {
 }
 
 export type ClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => void;
+export type ChangeHandler = (
+  event: React.ChangeEvent<HTMLInputElement>
+) => void;
+
+export interface SearchBarProps {
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
+}
+
+export interface recipeProps {
+  title: string;
+  description: string;
+  imgUrl: string;
+}
+
+export interface recipeData {
+  title: string;
+  description: string;
+  imgUrl: string;
+}
+
+export type recipesData = recipeData[];

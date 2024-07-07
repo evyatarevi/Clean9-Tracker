@@ -8,11 +8,9 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import imgObj from "../../images/bgImages.ts";
+import { type recipeProps } from "../../types.ts";
 
-const description =
-  " Lorem ipsum dolor sit amet consectetur adipisicing elit. In voluptates, fugit facere dolorum recusandae veniam praesentium fugiat obcaecati consectetur officia!";
-
-const Recipe = () => {
+const Recipe = ({ title, description, imgUrl }: recipeProps) => {
   const [showFullText, setShowFullText] = useState(false);
 
   const handleToggleText = () => {
@@ -27,24 +25,17 @@ const Recipe = () => {
   };
 
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      gap={2}
-      m="20px"
-      pb="100px"
-    >
-      <Card sx={{ maxWidth: 300 }}>
+    <Box>
+      <Card sx={{ width: 300 }}>
         <CardMedia
           component="img"
           height="140"
-          image={imgObj.headerImg}
+          image={imgUrl}
           alt={"imageAlt"}
         />
         <CardContent sx={{ paddingBottom: "0 !important" }}>
           <Typography gutterBottom variant="h5" component="div">
-            {"title"}
+            {title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {showFullText ? description : truncateText(description, 39)}
@@ -54,30 +45,7 @@ const Recipe = () => {
             onClick={handleToggleText}
             // sx={{ padding: 0, margin: 0 }}
           >
-            {showFullText ? "Show Less" : "Read More"}
-          </Button>
-        </CardContent>
-      </Card>
-      <Card sx={{ maxWidth: 300 }}>
-        <CardMedia
-          component="img"
-          height="140"
-          image={imgObj.headerImg}
-          alt={"imageAlt"}
-        />
-        <CardContent sx={{ paddingBottom: "0 !important" }}>
-          <Typography gutterBottom variant="h5" component="div">
-            {"title"}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {showFullText ? description : truncateText(description, 39)}
-          </Typography>
-          <Button
-            size="small"
-            onClick={handleToggleText}
-            // sx={{ padding: 0, margin: 0 }}
-          >
-            {showFullText ? "Show Less" : "Read More"}
+            {showFullText ? "קרא פחות" : "קרא עוד"}
           </Button>
         </CardContent>
       </Card>
