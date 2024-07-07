@@ -8,39 +8,21 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import { getRecipesData } from "../../api/recipesApi";
 import { recipesDataProps } from "../../types";
 
-// const recipesData = [
-//   {
-//     title: "עוף",
-//     description:
-//       " Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque libero veritatis voluptatum odit repellat veniam maiores illo, obcaecati vitae sit sunt hic quo fuga ab earum labore quos eveniet culpa dolorum nostrum accusantium? At officiis non, temporibus totam iusto libero!",
-//     imgUrl: "",
-//   },
-//   {
-//     title: "title",
-//     description:
-//       " Lorem עוף dolor sit amet consectetur adipisicing elit. Cumque libero veritatis voluptatum odit repellat veniam maiores illo, obcaecati vitae sit sunt hic quo fuga ab earum labore quos eveniet culpa dolorum nostrum accusantium? At officiis non, temporibus totam iusto libero!",
-//     imgUrl: "",
-//   },
-//   {
-//     title: "title",
-//     description:
-//       " Lorem שניצל dolor sit amet consectetur adipisicing elit. Cumque libero veritatis voluptatum odit repellat veniam maiores illo, obcaecati vitae sit sunt hic quo fuga ab earum labore quos eveniet culpa dolorum nostrum accusantium? At officiis non, temporibus totam iusto libero!",
-//     imgUrl: "",
-//   },
-// ];
-
 const Recipes = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [recipesData, setRecipesData] = useState<recipesDataProps>([]);
   const [isPending, setIsPending] = useState<boolean>(true);
   const [error, setError] = useState<string | null>();
 
+  const display = (img: any) => {
+    console.log("img;", img);
+  };
+
   const filteredCards = recipesData.filter(
     (card) =>
       card.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       card.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
-  console.log("filteredCards: ", filteredCards);
 
   useEffect(() => {
     setIsPending(true);
@@ -79,9 +61,11 @@ const Recipes = () => {
       >
         <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         {isPending && <CircularProgress size={100} />}
-        {filteredCards.map((recipe, index) => (
-          <Recipe {...recipe} key={index} />
-        ))}
+        {filteredCards.map((recipe, index) => {
+          display(recipe.imgUrl);
+
+          return <Recipe {...recipe} key={index} />;
+        })}
       </Box>
       {error && <Typography color="error">{error}</Typography>}
     </Box>
