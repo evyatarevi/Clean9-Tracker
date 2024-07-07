@@ -30,7 +30,6 @@ const Recipes = () => {
     const fetchRecipes = async () => {
       try {
         const res = await getRecipesData();
-        console.log("recipies: ", res);
         if (res) {
           setRecipesData(res);
         }
