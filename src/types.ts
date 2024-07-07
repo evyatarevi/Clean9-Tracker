@@ -51,4 +51,4 @@ export interface recipeData {
   imgUrl: string;
 }
 
-export type recipesData = recipeData[];
+export type recipesDataProps = recipeData[];

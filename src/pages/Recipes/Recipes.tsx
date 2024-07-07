@@ -6,7 +6,7 @@ import Recipe from "../../components/Recipe/Recipe";
 import bgImages from "../../images/bgImages";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import { getRecipesData } from "../../api/recipesApi";
-import { recipesData } from "../../types";
+import { recipesDataProps } from "../../types";
 
 // const recipesData = [
 //   {
@@ -31,7 +31,7 @@ import { recipesData } from "../../types";
 
 const Recipes = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [recipesData, setRecipesData] = useState<recipesData>([]);
+  const [recipesData, setRecipesData] = useState<recipesDataProps>([]);
   const [isPending, setIsPending] = useState<boolean>(true);
   const [error, setError] = useState<string | null>();
 
