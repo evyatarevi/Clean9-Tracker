@@ -62,6 +62,7 @@ const Recipes = () => {
         {isPending && <CircularProgress size={100} />}
         {filteredCards.map((recipe, index) => {
           display(recipe.imgUrl);
+          console.log("recipe.imgUrl: ", recipe.imgUrl);
 
           return <Recipe {...recipe} key={index} />;
         })}
