@@ -1,6 +1,6 @@
 import { Box, Typography, Button } from "@mui/material";
 import { type ClickHandler } from "../../types";
-import bgImages from "../../images/bgImages";
+// import bgImages from "../../images/bgImages";
 
 interface ChildProps {
   handleStartPlain: ClickHandler;
