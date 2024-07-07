@@ -7,7 +7,7 @@ import {
   Box,
 } from "@mui/material";
 import { useState } from "react";
-import imgObj from "../../images/bgImages.ts";
+// import imgObj from "../../images/bgImages.ts";
 import { type recipeProps } from "../../types.ts";
 
 const Recipe = ({ title, description, imgUrl }: recipeProps) => {

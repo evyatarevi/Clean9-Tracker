@@ -11,7 +11,7 @@ const StartPlaning = ({ handleStartPlain }: ChildProps) => {
     <Box
       sx={{
         height: "100vh",
-        backgroundImage: `url(${bgImages.bgHomeImage})`,
+        // backgroundImage: `url(${bgImages.bgHomeImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
